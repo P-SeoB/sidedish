@@ -146,17 +146,17 @@ extension OrderingCollectionViewCell {
         descriptionLabel.text = text
     }
     
-    func setMenuPrice(nPrice: String?, sPrice: String?) {
-        guard let sPrice = sPrice else { return }
+    func setMenuPrice(originPrice: String?, discountedPrice: String?) {
+        guard let discountedPrice = discountedPrice else { return }
         
-        if let nPrice = nPrice {
-            let discountedPriceLabel = UILabel.makeCurrentPriceLabel(price: sPrice)
-            let originPriceLabel = UILabel.makePreviousPriceLabel(price: nPrice)
+        if let originPrice = originPrice {
+            let discountedPriceLabel = UILabel.makeCurrentPriceLabel(price: discountedPrice)
+            let originPriceLabel = UILabel.makePreviousPriceLabel(price: originPrice)
             priceStackView.addArrangedSubview(discountedPriceLabel)
             priceStackView.addArrangedSubview(originPriceLabel)
         } else {
-            let originPriceLabel = UILabel.makeCurrentPriceLabel(price: sPrice)
-            priceStackView.addArrangedSubview(originPriceLabel)
+            let currentPriceLabel = UILabel.makeCurrentPriceLabel(price: discountedPrice)
+            priceStackView.addArrangedSubview(currentPriceLabel)
         }
     }
     
