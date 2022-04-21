@@ -176,7 +176,7 @@ extension OrderingCollectionViewCell {
         types.forEach { type in
             switch type {
             case "런칭특가":
-                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: UIColor.launchingBadgeBackgroun)
+                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: UIColor.launchingBadgeBackground)
                 badgeStackView.addArrangedSubview(badge)
             case "이벤트특가":
                 let badge = UILabel.makeBadge(title: "이벤트특가", backgroundColor: UIColor.eventBadgeBackground)
