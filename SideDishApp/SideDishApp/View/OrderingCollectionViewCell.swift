@@ -10,9 +10,6 @@ import UIKit
 final class OrderingCollectionViewCell: UICollectionViewCell {
     
     private let identifier = Constant.Identifier.orderingViewCell
-    private let launchingBadgeBackgrounColor = UIColor(red: 0.0, green: 102/255, blue: 214/255, alpha: 1.0)
-    private let eventBadgeBackgroundColor = UIColor(red: 128/255, green: 188/255, blue: 255/255, alpha: 1.0)
-    private let defaultBadgeBackgroundColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
     
     private lazy var cellView = UIView()
     
@@ -179,13 +176,13 @@ extension OrderingCollectionViewCell {
         types.forEach { type in
             switch type {
             case "런칭특가":
-                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: launchingBadgeBackgrounColor)
+                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: UIColor.launchingBadgeBackgroun)
                 badgeStackView.addArrangedSubview(badge)
             case "이벤트특가":
-                let badge = UILabel.makeBadge(title: "이벤트특가", backgroundColor: eventBadgeBackgroundColor)
+                let badge = UILabel.makeBadge(title: "이벤트특가", backgroundColor: UIColor.eventBadgeBackground)
                 badgeStackView.addArrangedSubview(badge)
             default:
-                let badge = UILabel.makeBadge(title: type, backgroundColor: defaultBadgeBackgroundColor)
+                let badge = UILabel.makeBadge(title: type, backgroundColor: UIColor.defaultBadgeBackground)
                 badgeStackView.addArrangedSubview(badge)
             }
         }
