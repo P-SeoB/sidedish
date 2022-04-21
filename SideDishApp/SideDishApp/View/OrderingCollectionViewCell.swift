@@ -10,6 +10,9 @@ import UIKit
 final class OrderingCollectionViewCell: UICollectionViewCell {
     
     private let identifier = Constant.Identifier.orderingViewCell
+    private let launchingBadgeBackgrounColor = UIColor(red: 0.0, green: 102/255, blue: 214/255, alpha: 1.0)
+    private let eventBadgeBackgroundColor = UIColor(red: 128/255, green: 188/255, blue: 255/255, alpha: 1.0)
+    private let defaultBadgeBackgroundColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
     
     private lazy var cellView = UIView()
     
@@ -146,17 +149,17 @@ extension OrderingCollectionViewCell {
         descriptionLabel.text = text
     }
     
-    func setMenuPrice(originPrice: String?, discountedPrice: String?) {
-        guard let discountedPrice = discountedPrice else { return }
+    func setMenuPrice(nPrice: String?, sPrice: String?) {
+        guard let sPrice = sPrice else { return }
         
-        if let originPrice = originPrice {
-            let discountedPriceLabel = UILabel.makeCurrentPriceLabel(price: discountedPrice)
-            let originPriceLabel = UILabel.makePreviousPriceLabel(price: originPrice)
+        if let nPrice = nPrice {
+            let discountedPriceLabel = UILabel.makeCurrentPriceLabel(price: sPrice)
+            let originPriceLabel = UILabel.makePreviousPriceLabel(price: nPrice)
             priceStackView.addArrangedSubview(discountedPriceLabel)
             priceStackView.addArrangedSubview(originPriceLabel)
         } else {
-            let currentPriceLabel = UILabel.makeCurrentPriceLabel(price: discountedPrice)
-            priceStackView.addArrangedSubview(currentPriceLabel)
+            let originPriceLabel = UILabel.makeCurrentPriceLabel(price: sPrice)
+            priceStackView.addArrangedSubview(originPriceLabel)
         }
     }
     
@@ -176,13 +179,13 @@ extension OrderingCollectionViewCell {
         types.forEach { type in
             switch type {
             case "런칭특가":
-                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: UIColor.launchingBadgeBackground)
+                let badge = UILabel.makeBadge(title: "런칭특가", backgroundColor: launchingBadgeBackgrounColor)
                 badgeStackView.addArrangedSubview(badge)
             case "이벤트특가":
-                let badge = UILabel.makeBadge(title: "이벤트특가", backgroundColor: UIColor.eventBadgeBackground)
+                let badge = UILabel.makeBadge(title: "이벤트특가", backgroundColor: eventBadgeBackgroundColor)
                 badgeStackView.addArrangedSubview(badge)
             default:
-                let badge = UILabel.makeBadge(title: type, backgroundColor: UIColor.defaultBadgeBackground)
+                let badge = UILabel.makeBadge(title: type, backgroundColor: defaultBadgeBackgroundColor)
                 badgeStackView.addArrangedSubview(badge)
             }
         }
