@@ -9,7 +9,7 @@
 
 ## 📌 규칙
 
-간단한 Schedule과 Git Convention을 정해보았습니다.
+간단한 Schedule과 Git Convention.
 
 <br/><br/>
 
@@ -61,3 +61,12 @@ content
 Todo
 - set autolayout
 ```
+### 실행화면
+|실행 화면|
+|:-:|
+|![CleanShot 2022-04-27 at 18 17 53](https://user-images.githubusercontent.com/57667738/165485778-c999a4f2-2260-4a54-a686-6b2ea49e7ae2.gif)|
+
+### 고민 및 해결
+프로젝트 진행중 고민 및 해결을 담은 [wiki](https://github.com/Piggy-Seob/sidedish/wiki)
+
+
