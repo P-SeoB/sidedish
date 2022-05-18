@@ -10,7 +10,7 @@ import OSLog
 
 final class OrderingCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    private var networkRepository: NetworkRepository?
+    private var networkRepository: NetworkRepository<ImageCacheManager>?
     
     private var headers: [Category] = [Category.main,
                                        Category.soup,
@@ -92,7 +92,11 @@ final class OrderingCollectionViewDataSource: NSObject, UICollectionViewDataSour
 
 extension OrderingCollectionViewDataSource {
     private func setImage(cell: OrderingCollectionViewCell, by imageURLString: String) {
-        networkRepository = NetworkRepository(networkManager: ImageNetworkManager(session: .shared))
+        networkRepository = NetworkRepository(
+            networkManager: ImageNetworkManager(session: .shared),
+            cacheManager: ImageCacheManager.shared
+        )
+        
         guard let imageURL = URL(string: imageURLString) else { return }
         
         networkRepository?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
@@ -100,7 +104,9 @@ extension OrderingCollectionViewDataSource {
                                      onCompleted: { imageData in
             guard let imageData = imageData,
                   let image = UIImage(data: imageData) else { return }
-            cell.setMenu(image: image)
+            DispatchQueue.main.async {
+                cell.setMenu(image: image)
+                }
             }
         )
     }

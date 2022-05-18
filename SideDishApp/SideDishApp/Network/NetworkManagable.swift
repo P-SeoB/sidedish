@@ -14,7 +14,6 @@ protocol NetworkManagable {
 }
 
 extension NetworkManagable {
-    
     func getStatusCode(response: URLResponse?) -> Int? {
         guard let httpResponse = response as? HTTPURLResponse else { return nil }
         return httpResponse.statusCode

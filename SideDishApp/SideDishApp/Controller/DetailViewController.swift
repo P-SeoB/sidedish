@@ -10,7 +10,7 @@ import OSLog
 
 final class DetailViewController: UIViewController {
     
-    private var networkRepositroy: NetworkRepository?
+    private var networkRepositroy: NetworkRepository<ImageCacheManager>?
     private let menu: Menu
     private let detailScrollView = DetailScrollView()
     
@@ -119,7 +119,12 @@ extension DetailViewController {
 extension DetailViewController {
     
     func setThumbNail(imageURLStrings: [String]) {
-        networkRepositroy = NetworkRepository(networkManager: ImageNetworkManager(session: .shared))
+        
+        networkRepositroy = NetworkRepository(
+            networkManager: ImageNetworkManager(session: .shared),
+            cacheManager: ImageCacheManager.shared
+        )
+        
         detailScrollView.setOverViewImageScrollContentSize(imageCount: imageURLStrings.count)
         
         for (index, imageURLString) in imageURLStrings.enumerated() {
@@ -139,7 +144,11 @@ extension DetailViewController {
     }
     
     func setRecipe(imageURLStrings: [String]) {
-        networkRepositroy = NetworkRepository(networkManager: ImageNetworkManager.shared)
+        networkRepositroy = NetworkRepository(
+            networkManager: ImageNetworkManager(session: .shared),
+            cacheManager: ImageCacheManager.shared
+        )
+        
         detailScrollView.addPlaceholderView(count: imageURLStrings.count)
         
         for (index, imageURLString) in imageURLStrings.enumerated() {
@@ -151,7 +160,9 @@ extension DetailViewController {
                 guard let self = self,
                       let imageData = imageData,
                       let image = UIImage(data: imageData) else { return }
-                self.detailScrollView.setRecipe(image: image, at: index)
+                DispatchQueue.main.async {
+                    self.detailScrollView.setRecipe(image: image, at: index)
+                    }
                 }
             )
         }
