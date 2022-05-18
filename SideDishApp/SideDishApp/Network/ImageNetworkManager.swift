@@ -9,11 +9,7 @@ import Foundation
 
 struct ImageNetworkManager: NetworkManagable {
     
-    private let cache = NSCache<NSString, NSData>()
-    
     var session: URLSession
-    
-    static let shared = ImageNetworkManager(session: .shared)
     
     init(session: URLSession) {
         self.session = session
@@ -21,25 +17,8 @@ struct ImageNetworkManager: NetworkManagable {
     
     func request<T>(endpoint: Endpointable, completion: @escaping ((Result<T?, NetworkError>) -> Void)) {
         
-        guard let cachepath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
-        
-        print(cachepath)
-        
         guard let url = endpoint.getURL() else {
             return completion(.failure(.invalidURL))
-        }
-        
-        // CheckMemory
-        if let imageNSData = findImageDataInMemoryCache(from: url) {
-            let imageData = Data(referencing: imageNSData)
-            return completion(.success(imageData as? T))
-        }
-        
-        // CheckDisk
-        if let imageNSData = findImageInDiskCache(from: url) {
-            self.cache.setObject(imageNSData, forKey: url.lastPathComponent as NSString)
-            let imageData = Data(referencing: imageNSData)
-            return completion(.success(imageData as? T))
         }
         
         // Request to Server
@@ -80,6 +59,7 @@ struct ImageNetworkManager: NetworkManagable {
             let fileManager = FileManager.default
             let tempPath = location?.path ?? ""
             
+            // CacheDirectory Path
             guard let cacheDirectoryPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
             
             let imageName = urlRequest.url?.lastPathComponent ?? ""
@@ -89,37 +69,14 @@ struct ImageNetworkManager: NetworkManagable {
             try? fileManager.moveItem(atPath: tempPath, toPath: finalPath)
             
             var filePath = URL(fileURLWithPath: cacheDirectoryPath)
-            
             filePath.appendPathComponent(imageName)
             
             if fileManager.fileExists(atPath: finalPath) {
                 guard let imageNSData = NSData(contentsOf: filePath) else { return }
-                self.cache.setObject(imageNSData, forKey: imageName as NSString)
-                
-                let imageData = Data(referencing: imageNSData)
-                return completion(.success(imageData as? T))
+                return completion(.success(imageNSData as? T))
             }
             
         }
         dataTask.resume()
-    }
-    
-    private func findImageDataInMemoryCache(from url: URL) -> NSData? {
-        let cacheKey = NSString(string: url.lastPathComponent)
-        let cachedImageData = self.cache.object(forKey: cacheKey)
-        return cachedImageData
-    }
-    
-    private func findImageInDiskCache(from url: URL) -> NSData? {
-        let fileManager = FileManager()
-        guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return nil }
-        var filePath = URL(fileURLWithPath: path)
-        filePath.appendPathComponent(url.lastPathComponent)
-        
-        if fileManager.fileExists(atPath: filePath.path) {
-            let imageData = NSData(contentsOf: filePath)
-            return imageData
-        }
-        return nil
     }
 }

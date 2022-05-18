@@ -64,7 +64,7 @@ struct NetworkManager: NetworkManagable {
             
             // handling DecodingError
             do {
-                let fetchedData = try JSONDecoder().decode(T.self, from: data) // Data -> T: Decodable
+                let fetchedData = try JSONDecoder().decode(T.self, from: data)
                 return completion(.success(fetchedData))
                 
             } catch {

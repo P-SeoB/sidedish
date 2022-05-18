@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import SideDishApp
 
 class NetworkManagerTest: XCTestCase {
     

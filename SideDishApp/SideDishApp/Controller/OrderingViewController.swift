@@ -13,7 +13,7 @@ final class OrderingViewController: UIViewController {
     private var orderingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var collectionViewDataSource = OrderingCollectionViewDataSource()
     private var collectionViewDelegate = OrderingCollectionViewDelegate()
-    private var networkRepository: NetworkRepository?
+    private var networkRepository: NetworkRepository<ImageCacheManager>?
     
     private var collectionViewLayout: UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -80,6 +80,9 @@ final class OrderingViewController: UIViewController {
             networkRepository?.fetchData(endpoint: EndPointCase.get(category: category).endpoint,
                                          decodeType: SideDishInfo.self,
                                          onCompleted: { [weak self] mainDishInfo in
+                
+            // View 업데이트
+            DispatchQueue.main.async {
                 // Repository에 요청한 Data에서 필요한 부분으로 로직을 처리함.
                 guard let self = self,
                       let menus = mainDishInfo?.body else { return }
@@ -88,16 +91,14 @@ final class OrderingViewController: UIViewController {
                 self.collectionViewDataSource.fetch(menus: menus, category: category)
                 self.setHeaderViewDelegate()
                 
-                // View 업데이트
-                DispatchQueue.main.async {
-                    guard let sectionIndex = Category.allCases.firstIndex(of: category) else { return }
-                    switch category {
-                    case .main:
-                        self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
-                    case .soup:
-                        self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
-                    case .side:
-                        self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
+                guard let sectionIndex = Category.allCases.firstIndex(of: category) else { return }
+                switch category {
+                case .main:
+                    self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
+                case .soup:
+                    self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
+                case .side:
+                    self.orderingCollectionView.reloadSections(IndexSet(integer: sectionIndex))
                     }
                 }
             }
