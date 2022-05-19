@@ -14,14 +14,13 @@ class NetworkManagerTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = NetworkManager(session: .shared)
-        sut = ImageNetworkManager(session: .shared)
     }
 
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
     }
-
+    
     func testNetworkManager() throws {
         // MockData - Main
         guard let path = Bundle.main.path(forResource: "MainMockData", ofType: "json") else { return }
@@ -61,10 +60,10 @@ class NetworkManagerTest: XCTestCase {
         configuration.protocolClasses = [URLMockProtocol.self]
         
         // Dependency injection
-        let networkmanager = NetworkManager(session: URLSession(configuration: configuration))
+        sut = NetworkManager(session: URLSession(configuration: configuration))
         
         // Test request - main
-        networkmanager.request(endpoint: mainDishMockEndPoint) {(result: Result<SideDishInfo?, NetworkError>) in
+        sut.request(endpoint: mainDishMockEndPoint) {(result: Result<SideDishInfo?, NetworkError>) in
             switch result {
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedMain)
@@ -75,7 +74,7 @@ class NetworkManagerTest: XCTestCase {
         }
         
         // Test request - main
-        networkmanager.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
+        sut.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
             switch result {
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedDetail)
