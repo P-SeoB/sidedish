@@ -45,6 +45,7 @@ struct ImageCacheManager: CacheManagable {
     private func findDataInDiskMemory(from url: URL) -> NSData? {
         let fileManager = FileManager()
         guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return nil }
+        print(path)
         var filePath = URL(fileURLWithPath: path)
         filePath.appendPathComponent(url.lastPathComponent)
         

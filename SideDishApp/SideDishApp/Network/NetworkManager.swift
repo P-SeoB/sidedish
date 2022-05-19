@@ -20,6 +20,7 @@ struct NetworkManager: NetworkManagable {
         guard let url = endpoint.getURL() else {
             return completion(.failure(.invalidURL))
         }
+        
         var urlRequest = URLRequest(url: url)
         // HTTP Method
         let httpMethod = endpoint.getHttpMethod().description

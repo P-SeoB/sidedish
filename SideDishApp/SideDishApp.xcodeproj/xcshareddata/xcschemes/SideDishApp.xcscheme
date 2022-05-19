@@ -69,6 +69,26 @@
                ReferencedContainer = "container:SideDishApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D040EA328369AE100B775F3"
+               BuildableName = "ConstantTest.xctest"
+               BlueprintName = "ConstantTest"
+               ReferencedContainer = "container:SideDishApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8DE66C252837574F00367C6C"
+               BuildableName = "ImageNetworkManagerTest.xctest"
+               BlueprintName = "ImageNetworkManagerTest"
+               ReferencedContainer = "container:SideDishApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

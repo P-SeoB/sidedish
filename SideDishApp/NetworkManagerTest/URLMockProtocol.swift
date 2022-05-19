@@ -19,6 +19,7 @@ final class URLMockProtocol: URLProtocol {
         return request
     }
     
+    
     override func startLoading() {
         guard let handler = URLMockProtocol.loadingHandler else { return }
         let (response, data, error) = handler(request)
