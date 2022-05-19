@@ -8,12 +8,15 @@
 import Foundation
 import OSLog
 
-struct Repository<C: CacheManagable> {
+struct Repository: Repositoriable {
+    
     // NetworkManagable를 채택한 NetworkManager가 어떤 것일지에 따라 request가 달라짐.
     private var networkManager: NetworkManagable?
-    private var cacheManager: C?
     
-    init(networkManager: NetworkManagable, cacheManager: C? = nil) {
+    //CacheManager는 있을수도 있고 없을 수도 있음.
+    private var cacheManager: CacheManager?
+    
+    init(networkManager: NetworkManagable, cacheManager: CacheManager? = nil) {
         self.networkManager = networkManager
         self.cacheManager = cacheManager
     }
@@ -33,7 +36,7 @@ struct Repository<C: CacheManagable> {
                 onCompleted(success)
                 
                 // 성공값이 CachedData가 될수 있다면.
-                if let data = success as? C.CachedData {
+                if let data = success as? CacheManager.CachedData {
                     cacheManager?.setMemoryCache(url: url, data: data)
                 }
                 

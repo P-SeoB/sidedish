@@ -13,7 +13,7 @@ final class OrderingViewController: UIViewController {
     private var orderingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var collectionViewDataSource = OrderingCollectionViewDataSource()
     private var collectionViewDelegate = OrderingCollectionViewDelegate()
-    private var repository: Repository<ImageCacheManager>?
+    private var repository: RepositoryWrapper<Repository>?
     
     private var collectionViewLayout: UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -92,7 +92,9 @@ extension OrderingViewController {
     private func getSideDishInfo() {
         Category.allCases.forEach { category in
             // 특정 NetworkManager를 Repository에 주입함.
-            repository = Repository(networkManager: NetworkManager(session: .shared))
+            repository = RepositoryWrapper(repository:
+                                            Repository(networkManager: NetworkManager(session: .shared))
+            )
             
             repository?.fetchData(endpoint: EndPointCase.get(category: category).endpoint,
                                          decodeType: SideDishInfo.self,
@@ -128,7 +130,7 @@ extension OrderingViewController {
 //MARK: - DidSelect
 extension OrderingViewController: CollectionViewSelectionDetectable {
     func didSelectItem(index: IndexPath) {
-        repository = Repository(networkManager: NetworkManager(session: .shared))
+        repository = RepositoryWrapper(repository: Repository(networkManager: NetworkManager(session: .shared)))
         
         guard let menu = collectionViewDataSource.getSelectedItem(at: index) else { return }
         let detailVC = DetailViewController(menu: menu)

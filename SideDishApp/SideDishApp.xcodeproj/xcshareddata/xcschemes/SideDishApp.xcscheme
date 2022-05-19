@@ -59,6 +59,16 @@
                ReferencedContainer = "container:SideDishApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D2B945E283654630012C9B4"
+               BuildableName = "RepositoryTest.xctest"
+               BlueprintName = "RepositoryTest"
+               ReferencedContainer = "container:SideDishApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

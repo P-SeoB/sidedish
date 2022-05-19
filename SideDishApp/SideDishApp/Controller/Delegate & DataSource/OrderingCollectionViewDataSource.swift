@@ -10,7 +10,7 @@ import OSLog
 
 final class OrderingCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    private var repository: Repository<ImageCacheManager>?
+    private var repository: RepositoryWrapper<Repository>?
     
     private var headers: [Category] = [Category.main,
                                        Category.soup,
@@ -92,10 +92,12 @@ final class OrderingCollectionViewDataSource: NSObject, UICollectionViewDataSour
 
 extension OrderingCollectionViewDataSource {
     private func setImage(cell: OrderingCollectionViewCell, by imageURLString: String) {
-        repository = Repository(
+        repository = RepositoryWrapper(
+            repository:  Repository(
             networkManager: ImageNetworkManager(session: .shared),
             cacheManager: ImageCacheManager.shared
         )
+    )
         
         guard let imageURL = URL(string: imageURLString) else { return }
         
