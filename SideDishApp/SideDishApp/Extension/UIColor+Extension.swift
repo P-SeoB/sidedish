@@ -5,7 +5,7 @@
 //  Created by 김상혁 on 2022/04/21.
 //
 
-import UIKit
+import UIKit.UIColor
 
 extension UIColor {
     static let launchingBadgeBackground = UIColor(red: 0.0, green: 102/255, blue: 214/255, alpha: 1.0)

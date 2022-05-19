@@ -22,21 +22,21 @@ class NetworkManagerTest: XCTestCase {
     }
     
     func testNetworkManager() {
+        
+        let bundle = Bundle(for: Self.self)
+        
         // MockData - Main
-        guard let pathMain = Bundle.main.path(forResource: "MainMockData", ofType: "json"),
-              let jsonString = try? String(contentsOfFile: pathMain),
-              let mainDishMockdata = jsonString.data(using: .utf8) else {
-            XCTFail("Mock Data Path Error")
-            return
-            
+        guard let url = bundle.url(forResource: "MainMockData", withExtension: "json"),
+              let mainDishMockdata = try? Data(contentsOf: url) else {
+                XCTFail("Mock Data Path Error")
+                return
         }
         
         // MockData - detail
-        guard let pathDetail = Bundle.main.path(forResource: "DetailMockData", ofType: "json"),
-              let jsonString = try? String(contentsOfFile: pathDetail),
-              let dishDetailMockdata = jsonString.data(using: .utf8) else {
-            XCTFail("Mock Data Path Error")
-            return
+        guard let url = bundle.url(forResource: "DetailMockData", withExtension: "json"),
+              let dishDetailMockdata = try? Data(contentsOf: url) else {
+                XCTFail("Mock Data Path Error")
+                return
         }
         
         // Decoded MockData with specific type
@@ -99,4 +99,43 @@ class NetworkManagerTest: XCTestCase {
         wait(for: [expectedMain], timeout: 1)
         wait(for: [expectedDetail], timeout: 1)
     }
+    
+//    func testImageNetworkManager() {
+//        let bundle = Bundle(for: Self.self)
+//
+//        // MockData - Main
+//        guard let url = bundle.url(forResource: "mockImage", withExtension: "png"),
+//              let mockImageData = try? Data(contentsOf: url) else {
+//                XCTFail("Mock Data Path Error")
+//                return
+//        }
+//
+//        // MockURLrequest
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = HTTPMethod.get.description
+//
+//        // CacheDirectory Path
+//        guard let expectedDirectoryPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
+//
+//        let imageName = url.lastPathComponent
+//        let finalPath = expectedDirectoryPath + "/" + imageName
+//        let expectation = XCTestExpectation(description: "Downloading")
+//
+////        print(finalPath)
+//
+//        sut = ImageNetworkManager(session: .shared)
+//
+//        sut.dataTask(urlRequest: urlRequest) { (result: Result<Data?, NetworkError>) in
+//            print(result)
+//            switch result {
+//            case .success(let data):
+//                XCTAssertEqual(data, mockImageData)
+//            case .failure(let error):
+//                XCTFail("Request was not successful: \(error.localizedDescription)")
+//            }
+//            expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: 10)
+//    }
+//
 }
