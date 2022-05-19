@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import SideDishApp
 
 class NetworkManagerTest: XCTestCase {
     
@@ -67,10 +66,10 @@ class NetworkManagerTest: XCTestCase {
         // Test request - main
         networkmanager.request(endpoint: mainDishMockEndPoint) {(result: Result<SideDishInfo?, NetworkError>) in
             switch result {
-            case .failure(let error):
-                XCTFail("Request was not successful: \(error.localizedDescription)")
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedMain)
+            case .failure(let error):
+                XCTFail("Request was not successful: \(error.localizedDescription)")
             }
             expectedMain.fulfill()
         }
@@ -78,10 +77,10 @@ class NetworkManagerTest: XCTestCase {
         // Test request - main
         networkmanager.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
             switch result {
-            case .failure(let error):
-                XCTFail("Request was not successful: \(error.localizedDescription)")
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedDetail)
+            case .failure(let error):
+                XCTFail("Request was not successful: \(error.localizedDescription)")
             }
             expectedDetail.fulfill()
         }

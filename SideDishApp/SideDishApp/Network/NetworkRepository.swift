@@ -36,6 +36,7 @@ struct NetworkRepository<C: CacheManagable> {
                 if let data = success as? C.CachedData {
                     cacheManager?.setMemoryCache(url: url, data: data)
                 }
+                
             case .failure(let error):
                 os_log(.error, "\(error.localizedDescription)")
                 }

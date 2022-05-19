@@ -8,7 +8,8 @@
 import Foundation
 
 protocol CacheManagable {
-    associatedtype CachedData
+    associatedtype CachedData: NSObject
+    
     func checkCache(url: URL) -> CachedData?
     func setMemoryCache(url: URL, data: CachedData)
 }
