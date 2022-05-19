@@ -6,7 +6,5 @@ target 'SideDishApp' do
   use_frameworks!
 
   pod 'SwiftLint'
-  pod 'Toaster'
-
 
 end

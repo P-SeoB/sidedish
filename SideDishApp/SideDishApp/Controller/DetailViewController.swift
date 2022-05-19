@@ -10,7 +10,7 @@ import OSLog
 
 final class DetailViewController: UIViewController {
     
-    private var networkRepositroy: NetworkRepository<ImageCacheManager>?
+    private var repositroy: RepositoryWrapper<Repository>?
     private let menu: Menu
     private let detailScrollView = DetailScrollView()
     
@@ -120,16 +120,18 @@ extension DetailViewController {
     
     func setThumbNail(imageURLStrings: [String]) {
         
-        networkRepositroy = NetworkRepository(
+        repositroy = RepositoryWrapper(
+            repository: Repository(
             networkManager: ImageNetworkManager(session: .shared),
             cacheManager: ImageCacheManager.shared
         )
+    )
         
         detailScrollView.setOverViewImageScrollContentSize(imageCount: imageURLStrings.count)
         
         for (index, imageURLString) in imageURLStrings.enumerated() {
             guard let imageURL = URL(string: imageURLString) else { return }
-            networkRepositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
+            repositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
                                          decodeType: Data.self,
                                          onCompleted: { [weak self] imageData in
                 guard let self = self,
@@ -144,17 +146,19 @@ extension DetailViewController {
     }
     
     func setRecipe(imageURLStrings: [String]) {
-        networkRepositroy = NetworkRepository(
+        repositroy = RepositoryWrapper(
+            repository: Repository(
             networkManager: ImageNetworkManager(session: .shared),
             cacheManager: ImageCacheManager.shared
         )
+    )
         
         detailScrollView.addPlaceholderView(count: imageURLStrings.count)
         
         for (index, imageURLString) in imageURLStrings.enumerated() {
             guard let imageURL = URL(string: imageURLString) else { return }
             
-            networkRepositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
+            repositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
                                          decodeType: Data.self,
                                          onCompleted: { [weak self] imageData in
                 guard let self = self,

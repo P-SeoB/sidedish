@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import SideDishApp
 
 class NetworkManagerTest: XCTestCase {
     
@@ -15,14 +14,13 @@ class NetworkManagerTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = NetworkManager(session: .shared)
-        sut = ImageNetworkManager(session: .shared)
     }
 
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
     }
-
+    
     func testNetworkManager() throws {
         // MockData - Main
         guard let path = Bundle.main.path(forResource: "MainMockData", ofType: "json") else { return }
@@ -62,26 +60,26 @@ class NetworkManagerTest: XCTestCase {
         configuration.protocolClasses = [URLMockProtocol.self]
         
         // Dependency injection
-        let networkmanager = NetworkManager(session: URLSession(configuration: configuration))
+        sut = NetworkManager(session: URLSession(configuration: configuration))
         
         // Test request - main
-        networkmanager.request(endpoint: mainDishMockEndPoint) {(result: Result<SideDishInfo?, NetworkError>) in
+        sut.request(endpoint: mainDishMockEndPoint) {(result: Result<SideDishInfo?, NetworkError>) in
             switch result {
-            case .failure(let error):
-                XCTFail("Request was not successful: \(error.localizedDescription)")
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedMain)
+            case .failure(let error):
+                XCTFail("Request was not successful: \(error.localizedDescription)")
             }
             expectedMain.fulfill()
         }
         
         // Test request - main
-        networkmanager.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
+        sut.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
             switch result {
-            case .failure(let error):
-                XCTFail("Request was not successful: \(error.localizedDescription)")
             case .success(let result):
                 XCTAssertEqual(result, expectedDecodedDetail)
+            case .failure(let error):
+                XCTFail("Request was not successful: \(error.localizedDescription)")
             }
             expectedDetail.fulfill()
         }
