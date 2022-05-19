@@ -49,6 +49,16 @@
                ReferencedContainer = "container:SideDishApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D8529FF28364EB700D24ADB"
+               BuildableName = "PriceConverterTest.xctest"
+               BlueprintName = "PriceConverterTest"
+               ReferencedContainer = "container:SideDishApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

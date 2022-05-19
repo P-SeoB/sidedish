@@ -56,6 +56,8 @@
 		8D8529F72835E32C00D24ADB /* CacheManagerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16456628351EBE00AAAE5C /* CacheManagerable.swift */; };
 		8D8529F92835E33D00D24ADB /* MockCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8529F82835E33D00D24ADB /* MockCacheManager.swift */; };
 		8D8529FB283614F600D24ADB /* MockCacheManagerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8529FA283614F600D24ADB /* MockCacheManagerWrapper.swift */; };
+		8D852A0328364EB700D24ADB /* PriceConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D852A0228364EB700D24ADB /* PriceConverterTest.swift */; };
+		8D852A0928364EC400D24ADB /* PriceConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16456128351EBE00AAAE5C /* PriceConvertor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,13 @@
 			remoteInfo = SideDishApp;
 		};
 		8D8529F12835E31800D24ADB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D1644EC283519B700AAAE5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1644F3283519B700AAAE5C;
+			remoteInfo = SideDishApp;
+		};
+		8D852A0428364EB700D24ADB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D1644EC283519B700AAAE5C /* Project object */;
 			proxyType = 1;
@@ -117,6 +126,8 @@
 		8D8529EF2835E31800D24ADB /* CacheManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerTest.swift; sourceTree = "<group>"; };
 		8D8529F82835E33D00D24ADB /* MockCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheManager.swift; sourceTree = "<group>"; };
 		8D8529FA283614F600D24ADB /* MockCacheManagerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheManagerWrapper.swift; sourceTree = "<group>"; };
+		8D852A0028364EB700D24ADB /* PriceConverterTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceConverterTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D852A0228364EB700D24ADB /* PriceConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceConverterTest.swift; sourceTree = "<group>"; };
 		CDB550A5D8B1D54A9DA36D25 /* Pods-SideDishApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideDishApp.release.xcconfig"; path = "Target Support Files/Pods-SideDishApp/Pods-SideDishApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +148,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8D8529EA2835E31800D24ADB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D8529FD28364EB700D24ADB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -169,6 +187,7 @@
 				8D1644F6283519B700AAAE5C /* SideDishApp */,
 				8D16459B28351FBD00AAAE5C /* NetworkManagerTest */,
 				8D8529EE2835E31800D24ADB /* CacheManagerTest */,
+				8D852A0128364EB700D24ADB /* PriceConverterTest */,
 				8D1644F5283519B700AAAE5C /* Products */,
 				54D35C7AC61E2AFAEA6FAE20 /* Pods */,
 				576B2B502E2BE6FD24D079FF /* Frameworks */,
@@ -181,6 +200,7 @@
 				8D1644F4283519B700AAAE5C /* SideDishApp.app */,
 				8D16459A28351FBD00AAAE5C /* NetworkManagerTest.xctest */,
 				8D8529ED2835E31800D24ADB /* CacheManagerTest.xctest */,
+				8D852A0028364EB700D24ADB /* PriceConverterTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +335,14 @@
 			path = CacheManagerTest;
 			sourceTree = "<group>";
 		};
+		8D852A0128364EB700D24ADB /* PriceConverterTest */ = {
+			isa = PBXGroup;
+			children = (
+				8D852A0228364EB700D24ADB /* PriceConverterTest.swift */,
+			);
+			path = PriceConverterTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -373,6 +401,24 @@
 			productReference = 8D8529ED2835E31800D24ADB /* CacheManagerTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8D8529FF28364EB700D24ADB /* PriceConverterTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D852A0628364EB700D24ADB /* Build configuration list for PBXNativeTarget "PriceConverterTest" */;
+			buildPhases = (
+				8D8529FC28364EB700D24ADB /* Sources */,
+				8D8529FD28364EB700D24ADB /* Frameworks */,
+				8D8529FE28364EB700D24ADB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D852A0528364EB700D24ADB /* PBXTargetDependency */,
+			);
+			name = PriceConverterTest;
+			productName = PriceConverterTest;
+			productReference = 8D852A0028364EB700D24ADB /* PriceConverterTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -394,6 +440,10 @@
 						CreatedOnToolsVersion = 13.3.1;
 						TestTargetID = 8D1644F3283519B700AAAE5C;
 					};
+					8D8529FF28364EB700D24ADB = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 8D1644F3283519B700AAAE5C;
+					};
 				};
 			};
 			buildConfigurationList = 8D1644EF283519B700AAAE5C /* Build configuration list for PBXProject "SideDishApp" */;
@@ -412,6 +462,7 @@
 				8D1644F3283519B700AAAE5C /* SideDishApp */,
 				8D16459928351FBD00AAAE5C /* NetworkManagerTest */,
 				8D8529EC2835E31800D24ADB /* CacheManagerTest */,
+				8D8529FF28364EB700D24ADB /* PriceConverterTest */,
 			);
 		};
 /* End PBXProject section */
@@ -436,6 +487,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8D8529EB2835E31800D24ADB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D8529FE28364EB700D24ADB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -552,6 +610,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D8529FC28364EB700D24ADB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D852A0928364EC400D24ADB /* PriceConvertor.swift in Sources */,
+				8D852A0328364EB700D24ADB /* PriceConverterTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -564,6 +631,11 @@
 			isa = PBXTargetDependency;
 			target = 8D1644F3283519B700AAAE5C /* SideDishApp */;
 			targetProxy = 8D8529F12835E31800D24ADB /* PBXContainerItemProxy */;
+		};
+		8D852A0528364EB700D24ADB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1644F3283519B700AAAE5C /* SideDishApp */;
+			targetProxy = 8D852A0428364EB700D24ADB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -821,6 +893,42 @@
 			};
 			name = Release;
 		};
+		8D852A0728364EB700D24ADB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6KUR9465F;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeobJin.PriceConverterTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideDishApp.app/SideDishApp";
+			};
+			name = Debug;
+		};
+		8D852A0828364EB700D24ADB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6KUR9465F;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeobJin.PriceConverterTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SideDishApp.app/SideDishApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -856,6 +964,15 @@
 			buildConfigurations = (
 				8D8529F42835E31800D24ADB /* Debug */,
 				8D8529F52835E31800D24ADB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D852A0628364EB700D24ADB /* Build configuration list for PBXNativeTarget "PriceConverterTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D852A0728364EB700D24ADB /* Debug */,
+				8D852A0828364EB700D24ADB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
