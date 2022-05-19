@@ -10,7 +10,7 @@ import OSLog
 
 final class DetailViewController: UIViewController {
     
-    private var networkRepositroy: NetworkRepository<ImageCacheManager>?
+    private var repositroy: Repository<ImageCacheManager>?
     private let menu: Menu
     private let detailScrollView = DetailScrollView()
     
@@ -120,7 +120,7 @@ extension DetailViewController {
     
     func setThumbNail(imageURLStrings: [String]) {
         
-        networkRepositroy = NetworkRepository(
+        repositroy = Repository(
             networkManager: ImageNetworkManager(session: .shared),
             cacheManager: ImageCacheManager.shared
         )
@@ -129,7 +129,7 @@ extension DetailViewController {
         
         for (index, imageURLString) in imageURLStrings.enumerated() {
             guard let imageURL = URL(string: imageURLString) else { return }
-            networkRepositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
+            repositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
                                          decodeType: Data.self,
                                          onCompleted: { [weak self] imageData in
                 guard let self = self,
@@ -144,7 +144,7 @@ extension DetailViewController {
     }
     
     func setRecipe(imageURLStrings: [String]) {
-        networkRepositroy = NetworkRepository(
+        repositroy = Repository(
             networkManager: ImageNetworkManager(session: .shared),
             cacheManager: ImageCacheManager.shared
         )
@@ -154,7 +154,7 @@ extension DetailViewController {
         for (index, imageURLString) in imageURLStrings.enumerated() {
             guard let imageURL = URL(string: imageURLString) else { return }
             
-            networkRepositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
+            repositroy?.fetchData(endpoint: EndPointCase.getImage(imagePath: imageURL.path).endpoint,
                                          decodeType: Data.self,
                                          onCompleted: { [weak self] imageData in
                 guard let self = self,

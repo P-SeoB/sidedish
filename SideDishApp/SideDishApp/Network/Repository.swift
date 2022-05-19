@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  Repository.swift
 //  SideDishApp
 //
 //  Created by 박진섭 on 2022/05/17.
@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-struct NetworkRepository<C: CacheManagable> {
+struct Repository<C: CacheManagable> {
     // NetworkManagable를 채택한 NetworkManager가 어떤 것일지에 따라 request가 달라짐.
     private var networkManager: NetworkManagable?
     private var cacheManager: C?

@@ -46,7 +46,7 @@ class CacheManagerTest: XCTestCase {
         let fileManager = FileManager()
         
         guard var path = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else { return }
-        
+        print(path)
         path.appendPathComponent(mockURL.lastPathComponent)
         
         if fileManager.fileExists(atPath: path.path) {  // if file already exist, remove that
