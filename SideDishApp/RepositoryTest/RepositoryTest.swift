@@ -27,12 +27,18 @@ class RepositoryTest: XCTestCase {
     func testFetchData()  {
             
         // MockData - detail
-        guard let path = Bundle.main.path(forResource: "DetailMockData", ofType: "json") else { return }
-        guard let jsonString = try? String(contentsOfFile: path) else { return }
-        guard let dishDetailMockdata = jsonString.data(using: .utf8) else { return }
+        guard let path = Bundle.main.path(forResource: "DetailMockData", ofType: "json"),
+              let jsonString = try? String(contentsOfFile: path),
+              let dishDetailMockdata = jsonString.data(using: .utf8) else {
+            XCTFail("Mock Data Path Error")
+            return
+        }
         
         // expected Data
-        guard let expectedDecodedDetail = try? JSONDecoder().decode(DetailDishInfo.self, from: dishDetailMockdata) else { return }
+        guard let expectedDecodedDetail = try? JSONDecoder().decode(DetailDishInfo.self, from: dishDetailMockdata) else {
+            XCTFail("Mock Data Decoding Error")
+            return
+        }
         
         // mockEndpoint
         let detailMockEndPoint = EndPointCase.getDetail(hash: "H1AA9").endpoint

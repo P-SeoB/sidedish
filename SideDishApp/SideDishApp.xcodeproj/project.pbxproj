@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		45082D787EB635A1A76C0C65 /* Pods_SideDishApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3B97C3662105F5B9E36735 /* Pods_SideDishApp.framework */; };
+		8D040E9C2836926B00B775F3 /* DetailMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D1645A328351FD500AAAE5C /* DetailMockData.json */; };
+		8D040E9D2836926E00B775F3 /* MainMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D1645A428351FD500AAAE5C /* MainMockData.json */; };
 		8D1644F8283519B700AAAE5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1644F7283519B700AAAE5C /* AppDelegate.swift */; };
 		8D164501283519B900AAAE5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D164500283519B900AAAE5C /* Assets.xcassets */; };
 		8D164504283519B900AAAE5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D164502283519B900AAAE5C /* LaunchScreen.storyboard */; };
@@ -550,6 +552,8 @@
 			files = (
 				8D164504283519B900AAAE5C /* LaunchScreen.storyboard in Resources */,
 				8D164501283519B900AAAE5C /* Assets.xcassets in Resources */,
+				8D040E9D2836926E00B775F3 /* MainMockData.json in Resources */,
+				8D040E9C2836926B00B775F3 /* DetailMockData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,4 +30,7 @@ final class URLMockProtocol: URLProtocol {
             client?.urlProtocol(self, didFailWithError: error!)
         }
     }
+    
+    override func stopLoading() {   }
+    
 }

@@ -21,20 +21,31 @@ class NetworkManagerTest: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func testNetworkManager() throws {
+    func testNetworkManager() {
         // MockData - Main
-        guard let path = Bundle.main.path(forResource: "MainMockData", ofType: "json") else { return }
-        guard let jsonString = try? String(contentsOfFile: path) else { return }
-        guard let mainDishMockdata = jsonString.data(using: .utf8) else { return }
+        guard let pathMain = Bundle.main.path(forResource: "MainMockData", ofType: "json"),
+              let jsonString = try? String(contentsOfFile: pathMain),
+              let mainDishMockdata = jsonString.data(using: .utf8) else {
+            XCTFail("Mock Data Path Error")
+            return
+            
+        }
         
         // MockData - detail
-        guard let path = Bundle.main.path(forResource: "DetailMockData", ofType: "json") else { return }
-        guard let jsonString = try? String(contentsOfFile: path) else { return }
-        guard let dishDetailMockdata = jsonString.data(using: .utf8) else { return }
+        guard let pathDetail = Bundle.main.path(forResource: "DetailMockData", ofType: "json"),
+              let jsonString = try? String(contentsOfFile: pathDetail),
+              let dishDetailMockdata = jsonString.data(using: .utf8) else {
+            XCTFail("Mock Data Path Error")
+            return
+        }
         
         // Decoded MockData with specific type
-        guard let expectedDecodedMain = try? JSONDecoder().decode(SideDishInfo.self, from: mainDishMockdata) else { return }
-        guard let expectedDecodedDetail = try? JSONDecoder().decode(DetailDishInfo.self, from: dishDetailMockdata) else { return }
+        guard let expectedDecodedMain = try? JSONDecoder().decode(SideDishInfo.self, from: mainDishMockdata),
+              let expectedDecodedDetail = try? JSONDecoder().decode(DetailDishInfo.self, from: dishDetailMockdata)
+        else {
+            XCTFail("Decoding Mock Data Error")
+            return
+        }
         
         // mockEndpoint
         let mainDishMockEndPoint = EndPointCase.get(category: .main).endpoint
@@ -49,6 +60,7 @@ class NetworkManagerTest: XCTestCase {
             case detailMockEndPoint.getURL():
                 return (response, dishDetailMockdata, nil)
             default:
+                XCTFail("Endpoint Error")
                 return (response, nil, nil)
             }
         }
@@ -73,7 +85,7 @@ class NetworkManagerTest: XCTestCase {
             expectedMain.fulfill()
         }
         
-        // Test request - main
+        // Test request - detail
         sut.request(endpoint: detailMockEndPoint) {(result: Result<DetailDishInfo?, NetworkError>) in
             switch result {
             case .success(let result):
